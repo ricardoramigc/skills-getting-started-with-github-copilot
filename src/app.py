@@ -65,3 +65,13 @@ def signup_for_activity(activity_name: str, email: str):
     # Add student
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
+
+
+# TODO: create an endpoint that returns the total number of students signed up across all activities
+@app.get("/activities/total_signups")
+def total_signups():
+    total = sum(len(activity["participants"]) for activity in activities.values())
+    return {"total_signups": total}
+
+# crea una funcion que retorne el nombre de actividades disponibles
+@app.get("/activities/available")
